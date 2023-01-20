@@ -292,11 +292,93 @@
 // console.log('form');
 // console.log('why???');
 
-const list = document.querySelector('.js-list');
-const load = document.querySelector('.js-load');
+//////////////////////////// pagination
 
+// const list = document.querySelector('.js-list');
+// const load = document.querySelector('.js-load');
+
+// let page = 1;
+// load.addEventListener('click', onLoad);
+
+// function rickAndMortyAPI(page = 1) {
+//   const BASE_URL = 'https://rickandmortyapi.com/api/character';
+//   const options = {
+//     method: 'GET',
+//   };
+
+//   return fetch(`${BASE_URL}?page=${page}`, options).then(resp => {
+//     if (!resp.ok) {
+//       throw new Error(resp.statusText);
+//     }
+//     return resp.json();
+//   });
+// }
+
+// rickAndMortyAPI()
+//   .then(data => {
+//     createMarkup(data.results);
+//     load.hidden = false;
+//   })
+//   .catch(err => console.log(err));
+
+// function createMarkup(arr) {
+//   const markup = arr
+//     .map(
+//       ({ image, name, status, species, type }) => `<li>
+// <image src ="${image}"></>
+// <h2>${name}</h2>
+// <h3>${status}</h3>
+// <h4>${species}</h4>
+// <h5>${type}</h5>
+// </li>`
+//     )
+//     .join('');
+
+//   list.insertAdjacentHTML('beforeend', markup);
+// }
+
+// function onLoad() {
+//   page += 1;
+//   rickAndMortyAPI(page)
+//     .then(data => {
+//       createMarkup(data.results);
+//       console.log(data);
+//       console.log(page);
+//       if (page === data.info.pages) {
+//         load.hidden = true;
+//       }
+//     })
+//     .catch(err => console.log(err));
+// }
+
+/////////////////////////////// scroll
+
+const list = document.querySelector('.js-list');
+const guard = document.querySelector('.js-guard');
 let page = 1;
-load.addEventListener('click', onLoad);
+const options = {
+  root: null,
+  rootMargin: '300px',
+  threshold: 1.0,
+};
+
+let observer = new IntersectionObserver(onLoad, options);
+
+function onLoad(entries, observer) {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      page += 1;
+      rickAndMortyAPI(page)
+        .then(data => {
+          createMarkup(data.results);
+          if (page === data.info.pages) {
+            observer.unobserve(guard);
+          }
+        })
+        .catch(err => console.log(err));
+    }
+  });
+}
 
 function rickAndMortyAPI(page = 1) {
   const BASE_URL = 'https://rickandmortyapi.com/api/character';
@@ -311,13 +393,6 @@ function rickAndMortyAPI(page = 1) {
     return resp.json();
   });
 }
-
-rickAndMortyAPI()
-  .then(data => {
-    createMarkup(data.results);
-    load.hidden = false;
-  })
-  .catch(err => console.log(err));
 
 function createMarkup(arr) {
   const markup = arr
@@ -335,16 +410,9 @@ function createMarkup(arr) {
   list.insertAdjacentHTML('beforeend', markup);
 }
 
-function onLoad() {
-  page += 1;
-  rickAndMortyAPI(page)
-    .then(data => {
-      createMarkup(data.results);
-      console.log(data);
-      console.log(page);
-      if (page === data.info.pages) {
-        load.hidden = true;
-      }
-    })
-    .catch(err => console.log(err));
-}
+rickAndMortyAPI()
+  .then(data => {
+    createMarkup(data.results);
+    observer.observe(guard);
+  })
+  .catch(err => console.log(err));
