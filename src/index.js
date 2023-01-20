@@ -206,88 +206,88 @@
 //   console.dir(evt);
 // }
 
-const items = [
-  {
-    name: 'Kitana',
-    prod: 'Mcfarlane',
-    line: 'Mortal Kombat',
-    img: 'https://mcfarlane.com/wp-content/uploads/2020/09/Kitanna_05.jpg',
-  },
-  {
-    name: 'Baraka',
-    prod: 'Mcfarlane',
-    line: 'Mortal Kombat',
-    img: 'https://mcfarlane.com/wp-content/uploads/2022/04/11072-MORTAL-KOMBAT-7IN-FIGURES-WV9-BARAKA-VARIANT-03_Logos.jpg',
-  },
-  {
-    name: 'Scorpion',
-    prod: 'Mcfarlane',
-    line: 'Mortal Kombat',
-    img: 'https://mcfarlane.com/wp-content/uploads/2020/12/11038_01.jpg',
-  },
-  {
-    name: 'Sub-Zero',
-    prod: 'Mcfarlane',
-    line: 'Mortal Kombat',
-    img: 'https://mcfarlane.com/wp-content/uploads/2019/09/Subzero_Front_CC.jpg',
-  },
-  {
-    name: 'Doom Slayer',
-    prod: 'Mcfarlane',
-    line: 'DOOM',
-    img: 'https://mcfarlane.com/wp-content/uploads/2019/07/DoomSlayer_Posed_CC.jpg',
-  },
-  {
-    name: 'Batman Hush',
-    prod: 'Mcfarlane',
-    line: 'DC Multiverse',
-    img: 'https://mcfarlane.com/wp-content/uploads/2022/12/15266_03_Logos.jpg',
-  },
-  {
-    name: 'Spawn',
-    prod: 'Mcfarlane',
-    line: 'Year of Spawn',
-    img: 'https://mcfarlane.com/wp-content/uploads/2020/05/SpawnMace_01.jpg',
-  },
-  {
-    name: 'Tyranid',
-    prod: 'Mcfarlane',
-    line: 'Warhammer',
-    img: 'https://mcfarlane.com/wp-content/uploads/2021/09/10927_06.jpg',
-  },
-  {
-    name: 'Snake Predator',
-    prod: 'Neca',
-    line: 'Predator 2',
-    img: 'https://necaonline.com/wp-content/uploads/2022/07/51426_UNP_1-scaled.jpg',
-  },
-];
+// const items = [
+//   {
+//     name: 'Kitana',
+//     prod: 'Mcfarlane',
+//     line: 'Mortal Kombat',
+//     img: 'https://mcfarlane.com/wp-content/uploads/2020/09/Kitanna_05.jpg',
+//   },
+//   {
+//     name: 'Baraka',
+//     prod: 'Mcfarlane',
+//     line: 'Mortal Kombat',
+//     img: 'https://mcfarlane.com/wp-content/uploads/2022/04/11072-MORTAL-KOMBAT-7IN-FIGURES-WV9-BARAKA-VARIANT-03_Logos.jpg',
+//   },
+//   {
+//     name: 'Scorpion',
+//     prod: 'Mcfarlane',
+//     line: 'Mortal Kombat',
+//     img: 'https://mcfarlane.com/wp-content/uploads/2020/12/11038_01.jpg',
+//   },
+//   {
+//     name: 'Sub-Zero',
+//     prod: 'Mcfarlane',
+//     line: 'Mortal Kombat',
+//     img: 'https://mcfarlane.com/wp-content/uploads/2019/09/Subzero_Front_CC.jpg',
+//   },
+//   {
+//     name: 'Doom Slayer',
+//     prod: 'Mcfarlane',
+//     line: 'DOOM',
+//     img: 'https://mcfarlane.com/wp-content/uploads/2019/07/DoomSlayer_Posed_CC.jpg',
+//   },
+//   {
+//     name: 'Batman Hush',
+//     prod: 'Mcfarlane',
+//     line: 'DC Multiverse',
+//     img: 'https://mcfarlane.com/wp-content/uploads/2022/12/15266_03_Logos.jpg',
+//   },
+//   {
+//     name: 'Spawn',
+//     prod: 'Mcfarlane',
+//     line: 'Year of Spawn',
+//     img: 'https://mcfarlane.com/wp-content/uploads/2020/05/SpawnMace_01.jpg',
+//   },
+//   {
+//     name: 'Tyranid',
+//     prod: 'Mcfarlane',
+//     line: 'Warhammer',
+//     img: 'https://mcfarlane.com/wp-content/uploads/2021/09/10927_06.jpg',
+//   },
+//   {
+//     name: 'Snake Predator',
+//     prod: 'Neca',
+//     line: 'Predator 2',
+//     img: 'https://necaonline.com/wp-content/uploads/2022/07/51426_UNP_1-scaled.jpg',
+//   },
+// ];
 
-const form = document.querySelector('.js-search');
-const list = document.querySelector('.js-list');
-form.addEventListener('submit', onSearch);
-console.log(form);
-function onSearch(evt) {
-  evt.preventDefault();
-  const { queryValue, selectValue } = evt.currentTarget.elements;
-  console.log(queryValue.value);
-  console.log(selectValue.value);
+// const form = document.querySelector('.js-search');
+// const list = document.querySelector('.js-list');
+// form.addEventListener('submit', onSearch);
+// console.log(form);
+// function onSearch(evt) {
+//   evt.preventDefault();
+//   const { queryValue, selectValue } = evt.currentTarget.elements;
+//   console.log(queryValue.value);
+//   console.log(selectValue.value);
 
-  const searchResult = items.filter(item =>
-    item[selectValue.value].includes(queryValue.value)
-  );
-  const markup = searchResult
-    .map(
-      ({ name, prod, line, img }) => `<li>
-    <img src="${img}" alt="${name}" width = "300">
-    <h2>${name}</h2>
-    <h3>${line}</h3>
-    <h4>${prod}</h4>
-    </li>
-  `
-    )
-    .join('');
-  list.innerHTML = markup;
-}
-console.log('form');
-console.log('why???');
+//   const searchResult = items.filter(item =>
+//     item[selectValue.value].includes(queryValue.value)
+//   );
+//   const markup = searchResult
+//     .map(
+//       ({ name, prod, line, img }) => `<li>
+//     <img src="${img}" alt="${name}" width = "300">
+//     <h2>${name}</h2>
+//     <h3>${line}</h3>
+//     <h4>${prod}</h4>
+//     </li>
+//   `
+//     )
+//     .join('');
+//   list.innerHTML = markup;
+// }
+// console.log('form');
+// console.log('why???');
